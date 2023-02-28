@@ -7,13 +7,14 @@ interface Props {
     mainTitle: string;
     title: string;
     context: string;
+    ImgSrc: string;
 }
 
-const MainTitle = ({ mainTitle, title, context }: Props) => {
+const MainTitle = ({ mainTitle, title, context, ImgSrc }: Props) => {
     return (
         <div css={mainContents}>
             <div css={titleText}>{mainTitle}</div>
-            <Contents title={title} context={context} />
+            <Contents title={title} context={context} ImgSrc={ImgSrc} />
         </div>
     );
 };

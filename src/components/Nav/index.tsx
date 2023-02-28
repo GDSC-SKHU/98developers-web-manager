@@ -3,21 +3,34 @@ import { css, Theme } from "@emotion/react";
 import Link from "next/link";
 import Image from "next/image";
 import theme from "@/styles/Theme/theme";
+import SignInModal from "../Modal/signInModal";
+import { useState } from "react";
 
 function Nav() {
+    // 모달의 상태를 저장하는 state
+    const [signClick, setSignClick] = useState<boolean>(false);
+
+    // 모달의 클릭 여부를 설정할 state함수
+    const modalClick = () => {
+        setSignClick(!signClick);
+    };
+
     return (
         <nav css={navStyle}>
             <div>
                 <Image
-                    src={"/Miri.png"}
+                    src={"/ZIKIZA.png"}
                     alt={"미리이미지"}
                     width={150}
                     height={85}
                 ></Image>
             </div>
-            <Link href="/regist/signin">
-                <button css={buttonStyle}>Sign in</button>
-            </Link>
+            <div>
+                <div css={buttonStyle} onClick={modalClick}>
+                    Sign in
+                </div>
+                {signClick && <SignInModal modalClick={modalClick} />}
+            </div>
         </nav>
     );
 }
@@ -55,4 +68,12 @@ const buttonStyle = (theme: Theme) => css`
     font-size: 25px;
 
     margin-right: 10px;
+`;
+
+const modal = css`
+    :modal {
+        border: 5px solid red;
+        background-color: yellow;
+        box-shadow: 3px 3px 10px rgba(0 0 0 / 0.5);
+    }
 `;

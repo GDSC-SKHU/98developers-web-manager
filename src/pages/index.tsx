@@ -24,6 +24,7 @@ export default function Home() {
                         context={
                             "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout."
                         }
+                        ImgSrc={"/Mobile-Home 1.png"}
                     />
                 </motion.div>
                 <motion.div
@@ -39,6 +40,7 @@ export default function Home() {
                         context={
                             "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout."
                         }
+                        ImgSrc={"/Mobile-Home 1.png"}
                     />
                 </motion.div>
                 <motion.div
@@ -54,6 +56,7 @@ export default function Home() {
                         context={
                             "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout."
                         }
+                        ImgSrc={"/Mobile-Home 1.png"}
                     />
                 </motion.div>
                 <motion.div

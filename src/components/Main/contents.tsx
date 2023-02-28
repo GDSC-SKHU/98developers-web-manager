@@ -1,20 +1,29 @@
 /** @jsxImportSource @emotion/react */
 import theme from "@/styles/Theme/theme";
 import { css, Theme } from "@emotion/react";
+import Image from "next/image";
 
 interface Props {
     title: string;
     context: string;
+    ImgSrc: string;
 }
 
-const Contents = ({ title, context }: Props) => {
+const Contents = ({ title, context, ImgSrc }: Props) => {
     return (
         <div css={contentBox}>
             <div css={columBox}>
                 <div css={titleBox}>{title}</div>
                 <div css={contextBox}>{context}</div>
             </div>
-            <div css={imageBox}>IMAGE</div>
+            <div>
+                <Image
+                    src={ImgSrc}
+                    alt={"IMAGE"}
+                    width={450}
+                    height={450}
+                ></Image>
+            </div>
         </div>
     );
 };
