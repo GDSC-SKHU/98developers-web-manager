@@ -1,79 +1,118 @@
 /** @jsxImportSource @emotion/react */
 import { css, Theme } from "@emotion/react";
-import Link from "next/link";
 import Image from "next/image";
-import theme from "@/styles/Theme/theme";
-import SignInModal from "../Modal/signInModal";
-import { useState } from "react";
+import { auth } from "@/api/instance/firebase";
+import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
 
 function Nav() {
-    // 모달의 상태를 저장하는 state
-    const [signClick, setSignClick] = useState<boolean>(false);
+    const router = useRouter();
+    const [username, setUserName] = useState<string>("");
 
-    // 모달의 클릭 여부를 설정할 state함수
-    const modalClick = () => {
-        setSignClick(!signClick);
+    useEffect(() => {
+        const getusername = localStorage.getItem("userName");
+        if (typeof getusername === "string") {
+            setUserName(getusername);
+        }
+    }, [typeof window !== "undefined" && localStorage.getItem("userName")]);
+
+    const logout = () => {
+        auth.signOut();
+        router.push("/");
     };
 
     return (
         <nav css={navStyle}>
-            <div>
-                <Image
-                    src={"/ZIKIZA.png"}
-                    alt={"미리이미지"}
-                    width={150}
-                    height={85}
-                ></Image>
-            </div>
-            <div>
-                <div css={buttonStyle} onClick={modalClick}>
-                    Sign in
+            <div css={navSubTitle}>
+                <div css={navImage}>
+                    <Image
+                        src={"/ZIKIZA.png"}
+                        alt={"미리이미지"}
+                        fill
+                        sizes="5vw"
+                    ></Image>
                 </div>
-                {signClick && <SignInModal modalClick={modalClick} />}
+                <div>ZIKIZA MANAGER</div>
+            </div>
+            <div css={nameNLogout}>
+                <div css={user}>{username}</div>
+                <div css={buttonStyle} onClick={logout}>
+                    Log Out
+                </div>
             </div>
         </nav>
     );
 }
 export default Nav;
 
-const navStyle = css`
+const navStyle = (theme: Theme) => css`
     position: fixed;
 
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: space-evenly;
-    gap: 70%;
+    gap: 30vw;
 
-    width: 100%;
-    margin-bottom: 24px;
-    padding-top: 20px;
-    padding-bottom: 20px;
+    width: 100vw;
+    height: 7vh;
+    padding-top: 4vh;
+    padding-bottom: 4vh;
 
     background-color: ${theme.color.white};
 
-    z-index: 2;
+    z-index: 1;
+`;
+
+const navSubTitle = (theme: Theme) => css`
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+
+    gap: 2vw;
+
+    font-weight: ${theme.fontWeight.bold};
+    font-size: 2.2vw;
 `;
 
 const buttonStyle = (theme: Theme) => css`
-    width: 160px;
-    height: 55px;
-    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 10vw;
+    height: 7vh;
+    border-radius: 0.3vw;
 
     background-color: ${theme.color.sapphire};
     color: ${theme.color.white};
 
-    text-align: center;
     font-size: ${theme.fontWeight.normal};
-    font-size: 25px;
-
-    margin-right: 10px;
+    font-size: 1.5vw;
 `;
 
-const modal = css`
-    :modal {
-        border: 5px solid red;
-        background-color: yellow;
-        box-shadow: 3px 3px 10px rgba(0 0 0 / 0.5);
-    }
+const navImage = (theme: Theme) => css`
+    position: relative;
+    width: 5vw;
+    height: 5vw;
+`;
+const nameNLogout = (theme: Theme) => css`
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 2vw;
+
+    width: 15vw;
+`;
+const user = (theme: Theme) => css`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: ${theme.color.sapphire};
+    width: 5vw;
+    height: 6.5vh;
+
+    color: ${theme.color.white};
+
+    border-radius: 0.5vw;
 `;

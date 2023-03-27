@@ -11,15 +11,15 @@ const SignUp = () => {
 
     const onChangeId = (e: ChangeEvent<HTMLInputElement>) => {
         setUserId(e.target.value);
-        console.log(userId);
+        // console.log(userId);
     };
     const onChangeNickname = (e: ChangeEvent<HTMLInputElement>) => {
         setUserNickname(e.target.value);
-        console.log(userNickname);
+        // console.log(userNickname);
     };
     const onChangePw = (e: ChangeEvent<HTMLInputElement>) => {
         setUserPw(e.target.value);
-        console.log(userPw);
+        // console.log(userPw);
     };
 
     const onsubmit = (e: ChangeEvent<HTMLFormElement>) => {
